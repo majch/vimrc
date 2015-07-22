@@ -13,9 +13,13 @@ else
 endif
 
 set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
+
+"source $VIMRUNTIME/vimrc_example.vim
+"source $VIMRUNTIME/mswin.vim
+
+if iswindows
+  behave mswin
+endif
 
 "一般设置
 set nu!
@@ -33,7 +37,7 @@ set ignorecase
 set shiftwidth=4
 set tabstop=4
 set expandtab
-set guifont=Bitstream_Vera_Sans_Mono:h10:cANSI
+
 
 "自定义快捷键
 map <C-j> <C-W>j
@@ -101,7 +105,7 @@ nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 "gvim窗口设置
 "隐藏gvim菜单栏和工具栏, 使用F2打开
-if has("gui_running") 
+if isgui 
 set guioptions-=m  " 隐藏菜单栏 
 set guioptions-=T  " 隐藏工具栏 
 "set guioptions-=L " 隐藏左侧滚动条 
@@ -109,6 +113,7 @@ set guioptions-=T  " 隐藏工具栏
 "set guioptions-=b " 隐藏底部滚动条 
 "set showtabline=0 " 隐藏Tab栏 
 set lines=35 columns=118 "设置gvim打开时的窗口大小
+"set guifont=Bitstream_Vera_Sans_Mono:h10:cANSI	" use when VeraMono.ttf installed
 endif 
 
 
