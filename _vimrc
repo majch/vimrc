@@ -1,3 +1,17 @@
+" windows or unix
+if (has("win32") || has("win64"))
+  let g:iswindows = 1
+else
+  let g:iswindows = 0
+endif
+
+" terminal or gvim/macvim
+if has("gui_running")
+  let g:isgui = 1
+else
+  let g:isgui = 0
+endif
+
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
