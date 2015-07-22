@@ -62,6 +62,7 @@ let Tlist_Exit_OnlyWindow=1
 let g:miniBufExplMapCTabSwitchBufs=1
 let g:miniBufExplMapWindowsNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
+let g:miniBufExplorerMoreThanOne=0
 
 "WinManager设置
 let g:winManagerWindowLayout='FileExplorer|TagList'
@@ -69,9 +70,6 @@ nmap wm :WMToggle<cr>
 
 "Grep设置
 nnoremap <silent> <F3> :Grep<CR>
-
-"MiniBufExplorer设置
-let g:miniBufExplorerMoreThanOne=0
 
 "Ctags设置
 "set tags=tags;
