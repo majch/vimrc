@@ -1,15 +1,15 @@
 " windows or unix
 if (has("win32") || has("win64"))
-  let g:iswindows = 1
+  let g:is_windows = 1
 else
-  let g:iswindows = 0
+  let g:is_windows = 0
 endif
 
 " terminal or gvim/macvim
 if has("gui_running")
-  let g:isgui = 1
+  let g:is_gui = 1
 else
-  let g:isgui = 0
+  let g:is_gui = 0
 endif
 
 set nocompatible
@@ -17,7 +17,7 @@ set nocompatible
 "source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
 
-if iswindows
+if is_windows
   behave mswin
 endif
 
@@ -107,7 +107,7 @@ nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 "gvim窗口设置
 "隐藏gvim菜单栏和工具栏, 使用F2打开
-if isgui 
+if is_gui 
 set guioptions-=m  " 隐藏菜单栏 
 set guioptions-=T  " 隐藏工具栏 
 "set guioptions-=L " 隐藏左侧滚动条 
