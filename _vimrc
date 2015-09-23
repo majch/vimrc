@@ -34,6 +34,7 @@ set autoindent			" ×Ô¶¯Ëõ½ø
 set cindent
 set smartindent
 set ignorecase
+set incsearch
 set shiftwidth=4
 set tabstop=4
 set expandtab
