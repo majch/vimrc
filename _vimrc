@@ -70,7 +70,7 @@ let g:winManagerWindowLayout='FileExplorer|TagList'
 nmap wm :WMToggle<cr>
 
 "Grep…Ë÷√
-nnoremap <silent> <F3> :Grep<CR>
+nnoremap <silent> <F3> :Rgrep<CR><CR><CR><CR>
 
 "Ctags…Ë÷√
 "set tags=tags;
