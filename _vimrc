@@ -12,7 +12,65 @@ else
   let g:is_gui = 0
 endif
 
+let mapleader=","
+
 set nocompatible
+
+filetype off                  " required
+
+"set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+" Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///Users/juncheng.ma/.vim'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+" Plugin 'user/L9', {'name': 'newL9'}
+
+Plugin 'CtrlP.vim'
+Plugin 'TList.vim'
+Plugin 'taglist.vim'
+Plugin 'winmanager'
+Plugin 'Grep.vim'
+Plugin 'minibufexpl.vim'
+Plugin 'ctags.vim'
+"Plugin 'Supertab'
+Plugin 'Valloric/YouCompleteMe'    " cd ~/.vim/bundle/YouCompleteMe; ./install.py --clang-completer
+Plugin 'pangloss/vim-javascript'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 "source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
@@ -22,10 +80,13 @@ if is_windows
 endif
 
 "Ò»°ãÉèÖÃ
-set nu!
-colorscheme desert
+set nu
 syntax enable
 syntax on
+"colorscheme desert
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
 autocmd InsertLeave * se nocul  " ÓÃÇ³É«¸ßÁÁµ±Ç°ÐÐ  
 autocmd InsertEnter * se cul    " ÓÃÇ³É«¸ßÁÁµ±Ç°ÐÐ
 set nobackup			" ²»Òª~±¸·ÝÎÄ¼þ
@@ -40,6 +101,9 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 
+" open the quickfix window after any grep invocation
+autocmd QuickFixCmdPost *grep* cwindow
+
 
 "×Ô¶¨Òå¿ì½Ý¼ü
 map <C-j> <C-W>j
@@ -48,6 +112,11 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 vnoremap <C-K> 0I//           "C/C++¿é×¢ÊÍ
 vnoremap <C-L> 0I<Del><Del>   "C/C++È¡Ïû×¢ÊÍ(Ö»¶Ôµ±Ç°ÐÐÓÐÓÃ)
+
+"YouCompleteMe
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+nnoremap <leader>g :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>r :YcmCompleter GoToReferences<CR>
 
 "×Ô¶¯²¹È«
 filetype plugin indent on 
@@ -67,11 +136,17 @@ let g:miniBufExplMapWindowNavArrows=1
 let g:miniBufExplorerMoreThanOne=0
 
 "WinManagerÉèÖÃ
-let g:winManagerWindowLayout='FileExplorer|TagList'
+let g:winManagerWindowLayout='NERDTree|TagList'
 nmap wm :WMToggle<cr>
 
 "GrepÉèÖÃ
 nnoremap <silent> <F3> :Rgrep<CR><CR><CR><CR>
+nnoremap <silent> <F4> :Ggrep<CR><CR><CR><CR>
+
+"vim-javascript
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
 
 "CtagsÉèÖÃ
 "set tags=tags;
@@ -116,33 +191,33 @@ set guioptions-=T  " Òþ²Ø¹¤¾ßÀ¸
 "set guioptions-=r " Òþ²ØÓÒ²à¹ö¶¯Ìõ 
 "set guioptions-=b " Òþ²Øµ×²¿¹ö¶¯Ìõ 
 "set showtabline=0 " Òþ²ØTabÀ¸ 
-set lines=35 columns=118 "ÉèÖÃgvim´ò¿ªÊ±µÄ´°¿Ú´óÐ¡
+set lines=100 columns=118 "ÉèÖÃgvim´ò¿ªÊ±µÄ´°¿Ú´óÐ¡
 "set guifont=Bitstream_Vera_Sans_Mono:h10:cANSI	" use when VeraMono.ttf installed
 endif 
 
 
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-endfunction
-
+"set diffexpr=MyDiff()
+"function MyDiff()
+"  let opt = '-a --binary '
+"  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+"  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+"  let arg1 = v:fname_in
+"  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+"  let arg2 = v:fname_new
+"  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+"  let arg3 = v:fname_out
+"  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+"  let eq = ''
+"  if $VIMRUNTIME =~ ' '
+"    if &sh =~ '\<cmd'
+"      let cmd = '""' . $VIMRUNTIME . '\diff"'
+"      let eq = '"'
+"    else
+"      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+"    endif
+"  else
+"    let cmd = $VIMRUNTIME . '\diff'
+"  endif
+"  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+"endfunction
+"
