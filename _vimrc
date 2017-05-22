@@ -55,6 +55,7 @@ Plugin 'Valloric/YouCompleteMe'    " cd ~/.vim/bundle/YouCompleteMe; ./install.p
 Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -125,19 +126,28 @@ let g:SuperTabRetainCompletionType = 2
 let g:SuperTabDefaultCompletionType = "<C-X><C-N>" 
 
 
-"Tlist设置
+"Tlist
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 
-"MiniBuf设置
+"MiniBuf
 let g:miniBufExplMapCTabSwitchBufs=1
 let g:miniBufExplMapWindowsNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
 let g:miniBufExplorerMoreThanOne=0
 
-"WinManager设置
+"WinManager
+let g:NERDTree_title='NERD Tree'
 let g:winManagerWindowLayout='NERDTree|TagList'
 nmap wm :WMToggle<cr>
+
+function! NERDTree_Start()
+    exec 'NERDTree'
+endfunction
+
+function! NERDTree_IsValid()
+    return 1
+endfunction
 
 "Grep设置
 nnoremap <silent> <F3> :Rgrep<CR><CR><CR><CR>
@@ -147,6 +157,16 @@ nnoremap <silent> <F4> :Ggrep<CR><CR><CR><CR>
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow = 1
+
+"vimrc
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers=['pylint']  " make sure listed checker is in your PATH
 
 "Ctags设置
 "set tags=tags;
