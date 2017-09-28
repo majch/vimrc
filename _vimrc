@@ -151,7 +151,7 @@ endfunction
 
 "Grep…Ë÷√
 nnoremap <silent> <F3> :Rgrep<CR><CR><CR><CR>
-nnoremap <silent> <F4> :Ggrep<CR><CR><CR><CR>
+nnoremap <silent> <leader>f :Ggrep <C-R><C-W><CR><C-O>
 
 "vim-javascript
 let g:javascript_plugin_jsdoc = 1
@@ -167,7 +167,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_python_checkers=['pylint']  " make sure listed checker is in your PATH
-"let g:syntastic_python_pylint_rcfile='~/.pylintrc'
+let g:syntastic_python_pylint_rcfile='~/.pylintrc'
+let g:syntastic_javascript_checkers=['eslint']
 
 "Ctags…Ë÷√
 "set tags=tags;
