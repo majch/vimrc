@@ -129,6 +129,8 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-N>"
 "Tlist
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
+"Download and build Exuberant Ctags first (required for MacOS)
+let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 
 "MiniBuf
 let g:miniBufExplMapCTabSwitchBufs=1
