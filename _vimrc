@@ -88,11 +88,11 @@ syntax on
 let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
-autocmd InsertLeave * se nocul  " ÓÃÇ³É«¸ßÁÁµ±Ç°ĞĞ  
-autocmd InsertEnter * se cul    " ÓÃÇ³É«¸ßÁÁµ±Ç°ĞĞ
-set nobackup			" ²»Òª~±¸·İÎÄ¼ş
-set autoread			" ÎÄ¼ş±»¸Ä¶¯×Ô¶¯ÔØÈë
-set autoindent			" ×Ô¶¯Ëõ½ø
+autocmd InsertLeave * se nocul  " highlight current line
+autocmd InsertEnter * se cul    " highlight current line
+set nobackup			" don't backup
+set autoread			" autoload changed file
+set autoindent			" auto indent
 set cindent
 set smartindent
 set ignorecase
@@ -106,20 +106,20 @@ set expandtab
 autocmd QuickFixCmdPost *grep* cwindow
 
 
-"×Ô¶¨Òå¿ì½İ¼ü
+" self-defined shortcuts
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-vnoremap <C-K> 0I//           "C/C++¿é×¢ÊÍ
-vnoremap <C-L> 0I<Del><Del>   "C/C++È¡Ïû×¢ÊÍ(Ö»¶Ôµ±Ç°ĞĞÓĞÓÃ)
+vnoremap <C-K> 0I//           "C/C++ block comment
+vnoremap <C-L> 0I<Del><Del>   "C/C++ uncomment (only work for the current line)
 
 "YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 nnoremap <leader>g :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>r :YcmCompleter GoToReferences<CR>
 
-"×Ô¶¯²¹È«
+"auto complete
 filetype plugin indent on 
 set completeopt=longest,menu
 let g:SuperTabRetainCompletionType = 2
@@ -151,7 +151,7 @@ function! NERDTree_IsValid()
     return 1
 endfunction
 
-"GrepÉèÖÃ
+"Grep
 nnoremap <silent> <F3> :Rgrep<CR><CR><CR><CR>
 nnoremap <silent> <leader>f :Ggrep <C-R><C-W><CR><C-O>
 
@@ -172,11 +172,11 @@ let g:syntastic_python_checkers=['pylint']  " make sure listed checker is in you
 let g:syntastic_python_pylint_rcfile='~/.pylintrc'
 let g:syntastic_javascript_checkers=['eslint']
 
-"CtagsÉèÖÃ
+"Ctags
 "set tags=tags;
 "set autochdir
 
-"cscopeÉèÖÃ
+"cscope
 if has("cscope")
   if is_windows
     set csprg=C:\Program\ Files\ (x86)\Vim\vim73\cscope.exe
@@ -206,16 +206,16 @@ nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 
-"gvim´°¿ÚÉèÖÃ
-"Òş²Øgvim²Ëµ¥À¸ºÍ¹¤¾ßÀ¸, Ê¹ÓÃF2´ò¿ª
+"gvim window setting
+"hide gvim menu and toolbar, F2 to open
 if is_gui 
-set guioptions-=m  " Òş²Ø²Ëµ¥À¸ 
-set guioptions-=T  " Òş²Ø¹¤¾ßÀ¸ 
-"set guioptions-=L " Òş²Ø×ó²à¹ö¶¯Ìõ 
-"set guioptions-=r " Òş²ØÓÒ²à¹ö¶¯Ìõ 
-"set guioptions-=b " Òş²Øµ×²¿¹ö¶¯Ìõ 
-"set showtabline=0 " Òş²ØTabÀ¸ 
-set lines=100 columns=118 "ÉèÖÃgvim´ò¿ªÊ±µÄ´°¿Ú´óĞ¡
+set guioptions-=m  " hide menu
+set guioptions-=T  " hide toolbar
+"set guioptions-=L " hide left scroll bar
+"set guioptions-=r " hide right scroll bar
+"set guioptions-=b " hide bottom scroll bar
+"set showtabline=0 " hide Tab bar
+set lines=100 columns=118 " gvim window size
 "set guifont=Bitstream_Vera_Sans_Mono:h10:cANSI	" use when VeraMono.ttf installed
 endif 
 
